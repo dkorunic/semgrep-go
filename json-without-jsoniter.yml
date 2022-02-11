@@ -1,0 +1,17 @@
+rules:
+  - id: json-without-jsoniter
+    patterns:
+      - pattern-not-inside: |
+          var $V = jsoniter.ConfigCompatibleWithStandardLibrary
+          ...
+          $V.Unmarshal(...)
+      - pattern-not-inside: |
+          var $V = jsoniter.ConfigCompatibleWithStandardLibrary
+          ...
+          $V.Marshal(...)
+      - pattern-either:
+          - pattern: json.Unmarshal(...)
+          - pattern: json.Marshal(...)
+    message: "json.Marshal() or json.Unmarshal() without jsoniter"
+    languages: [go]
+    severity: ERROR
