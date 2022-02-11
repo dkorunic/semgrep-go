@@ -9,6 +9,14 @@ rules:
           var $V = jsoniter.ConfigCompatibleWithStandardLibrary
           ...
           $V.Marshal(...)
+      - pattern-not-inside: |
+          $V := jsoniter.ConfigCompatibleWithStandardLibrary
+          ...
+          $V.Unmarshal(...)
+      - pattern-not-inside: |
+          $V := jsoniter.ConfigCompatibleWithStandardLibrary
+          ...
+          $V.Marshal(...)
       - pattern-either:
           - pattern: json.Unmarshal(...)
           - pattern: json.Marshal(...)
