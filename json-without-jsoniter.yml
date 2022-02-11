@@ -6,20 +6,38 @@ rules:
           ...
           $V.Unmarshal(...)
       - pattern-not-inside: |
+          $V := jsoniter.ConfigCompatibleWithStandardLibrary
+          ...
+          $V.Unmarshal(...)
+      - pattern-not-inside: |
           var $V = jsoniter.ConfigCompatibleWithStandardLibrary
           ...
           $V.Marshal(...)
       - pattern-not-inside: |
           $V := jsoniter.ConfigCompatibleWithStandardLibrary
           ...
-          $V.Unmarshal(...)
+          $V.Marshal(...)
+      - pattern-not-inside: |
+          var $V = jsoniter.ConfigCompatibleWithStandardLibrary
+          ...
+          $V.NewEncoder(...)
       - pattern-not-inside: |
           $V := jsoniter.ConfigCompatibleWithStandardLibrary
           ...
-          $V.Marshal(...)
+          $V.NewEncoder(...)
+      - pattern-not-inside: |
+          var $V = jsoniter.ConfigCompatibleWithStandardLibrary
+          ...
+          $V.NewDecoder(...)
+      - pattern-not-inside: |
+          $V := jsoniter.ConfigCompatibleWithStandardLibrary
+          ...
+          $V.NewDecoder(...)
       - pattern-either:
           - pattern: json.Unmarshal(...)
           - pattern: json.Marshal(...)
-    message: "json.Marshal() or json.Unmarshal() without jsoniter"
+          - pattern: json.NewDecoder(...)
+          - pattern: json.NewEncoder(...)
+    message: "using json Marshal() / Unmarshal() / NewDecoder() / NewEncoder() without jsoniter"
     languages: [go]
     severity: ERROR
