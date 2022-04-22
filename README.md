@@ -20,5 +20,5 @@ To make Semgrep [skip over some](https://semgrep.dev/docs/ignoring-files-folders
 
 ## Contents
 
-* `json-without-jsoniter`: check for stdlib *json* `Marshal()` or `Unmarshal()` use without *jsoniter*
-
+- `json-without-jsoniter`: check for stdlib _json_ `Marshal()` or `Unmarshal()` use without _jsoniter_
+- `err-overwrite.yml`: check if err is being overwritten in Go routines without shadow declarations
