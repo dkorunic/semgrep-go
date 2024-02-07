@@ -1,0 +1,16 @@
+rules:
+  - id: loopvar-shadow
+    patterns:
+      - pattern: |
+          for ..., $X := range ... {
+            ...
+            $Y := $X
+            ...
+          }
+      - metavariable-comparison:
+          comparison: str($X) == str($Y)
+    message: "Shadowing variable in for loop detected for $X"
+    languages:
+      - go
+    severity: WARNING
+
