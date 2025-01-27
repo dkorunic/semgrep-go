@@ -1,0 +1,14 @@
+rules:
+  - id: unreachable-timer-read
+    patterns:
+      - pattern: |
+          if !$X.Stop() {
+            ...
+            <-$X.C
+            ...
+          }
+    message: "Unreachable timer read detected"
+    languages:
+      - go
+    severity: WARNING
+
